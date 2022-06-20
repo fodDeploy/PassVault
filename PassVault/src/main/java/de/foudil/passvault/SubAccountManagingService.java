@@ -112,7 +112,7 @@ public class SubAccountManagingService {
 				else {
 				//updating the password
 				SubAccount subAccount=session.get(SubAccount.class, sub_id);
-				subAccount.setAccount_password(encryptH.encrypt(requestSubAccount.getSub_password().trim()));
+				subAccount.setAccount_password(encryptH.encrypt(requestSubAccount.getSub_password_new().trim()));
 				subAccount.setU_timeStamp(Long.toString(new Date().getTime()));
 				Transaction trx=session.beginTransaction();
 				session.update(subAccount);
@@ -161,7 +161,7 @@ public class SubAccountManagingService {
 					
 					//updating the email
 				SubAccount subAccount=session.get(SubAccount.class, sub_id);
-				subAccount.setAccount_email(requestSubAccount.getSub_email());
+				subAccount.setAccount_email(requestSubAccount.getSub_email_new());
 				subAccount.setU_timeStamp(Long.toString(new Date().getTime()));
 				Transaction trx=session.beginTransaction();
 				session.update(subAccount);
@@ -227,10 +227,10 @@ public class SubAccountManagingService {
 			//creating and opening the working session for login-authentication.
 			SessionFactory sf_signing= cfg_signing.buildSessionFactory(rg_signing);
 			Session session_signing = sf_signing.openSession();
-				
+			//signed holds the value of 0 in case the email does not exist, -1 in case only the password is incorrect and the main account's id otherwise.
 			int signed= new SigningHelper(session_signing,requestSubAccount.getMain_email(),requestSubAccount.getMain_password()).signIn();
 			if (signed==0){
-				return "not found";
+				return "email not found";
 			}
 			
 			else if (signed==-1) {
@@ -240,6 +240,7 @@ public class SubAccountManagingService {
 			else {
 				
 				SubAccountFinder finder= new SubAccountFinder(session, signed);
+				//in case no the requested password doesn't it returns 404 (no subaccount has an id of 404)
 				int sub_id=finder.findSubAccount(requestSubAccount.getSub_email(), requestSubAccount.getSub_at());
 				if(sub_id==404) {
 					return "no sub account found";

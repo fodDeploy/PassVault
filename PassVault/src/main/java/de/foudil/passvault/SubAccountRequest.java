@@ -7,6 +7,21 @@ public class SubAccountRequest {
 	
 	String sub_email;
 	String sub_password;
+	
+	String sub_email_new;
+	public String getSub_email_new() {
+		return sub_email_new;
+	}
+	public void setSub_email_new(String sub_email_new) {
+		this.sub_email_new = sub_email_new;
+	}
+	String sub_password_new;
+	public String getSub_password_new() {
+		return sub_password_new;
+	}
+	public void setSub_password_new(String sub_password_new) {
+		this.sub_password_new = sub_password_new;
+	}
 	String sub_at;
 	public String getMain_email() {
 		return main_email;
