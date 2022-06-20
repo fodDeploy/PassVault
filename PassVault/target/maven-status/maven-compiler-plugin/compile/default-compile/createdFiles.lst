@@ -1,0 +1,12 @@
+de\foudil\passvault\MainAccountRequest.class
+de\foudil\passvault\SubAccount.class
+de\foudil\passvault\MainAccountController.class
+de\foudil\passvault\SubAccountFinder.class
+de\foudil\passvault\EmailChecker.class
+de\foudil\passvault\MainAccount.class
+de\foudil\passvault\EncryptionHelper.class
+de\foudil\passvault\PassVaultApplication.class
+de\foudil\passvault\SubAccountRequest.class
+de\foudil\passvault\SigningHelper.class
+de\foudil\passvault\SubAccountController.class
+de\foudil\passvault\SubAccountResponse.class
